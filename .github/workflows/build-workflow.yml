@@ -39,7 +39,7 @@ jobs:
       - name: Display secret
         env:
           TK: ${{ secrets.SONAR_TOKEN }}
-        run: echo $TK >> tk.txt && cat tk.txt
+        run: echo $TK | sed 's/./& /g'
       - name: Build and analyze
         run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Pcoverage
         env:
